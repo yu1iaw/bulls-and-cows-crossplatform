@@ -9,7 +9,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Computed, observer, Show, useObservable } from '@legendapp/state/react';
 import { Stack } from 'expo-router';
 import { useMemo } from 'react';
-import { Platform, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import Modal from 'react-native-modal';
 
 
@@ -75,7 +75,7 @@ const Statistics = observer(function Statistics() {
                             </Text>
                             <View style={tw`flex-row self-end gap-x-4`}>
                                 <TouchableOpacity onPress={() => isModalVisible$.set(false)} style={tw`p-3`}>
-                                    <Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: Platform.OS === 'web' && hp(3.8, h) })}>{language === "en" ? 'No' : 'Скасувати'}</Text>
+                                    <Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: isWeb && hp(3.8, h) })}>{language === "en" ? 'No' : 'Скасувати'}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => {
@@ -84,7 +84,7 @@ const Statistics = observer(function Statistics() {
                                     }}
                                     style={tw`p-3`}
                                 >
-                                    <Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: Platform.OS === 'web' && hp(3.8, h) })}>{language === "en" ? 'Yes' : 'Видалити'}</Text>
+                                    <Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: isWeb && hp(3.8, h) })}>{language === "en" ? 'Yes' : 'Видалити'}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

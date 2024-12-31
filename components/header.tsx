@@ -27,7 +27,7 @@ export const Header = ({ gameTracking, noAttempts, timeIntervalTitle, language, 
                         style={tw`p-[10px] z-50`}
                         onPress={() => {
                             !gameTracking.finished
-                                ? router.navigate({ pathname: "/settings", params: { settings: noAttempts ? "on" : "off" } })
+                                ? router.navigate({ pathname: "/settings", params: { set: noAttempts ? "on" : "off" } })
                                 : router.navigate({ pathname: "/result", params: { title: gameTracking.seekingValue } })
                         }}
                     >

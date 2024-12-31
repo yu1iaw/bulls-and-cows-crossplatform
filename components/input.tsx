@@ -47,7 +47,7 @@ export const Input = observer(({ palette, value$, onPress, disabled, w }: InputP
                 maxLength={4}
                 placeholder="1234"
                 placeholderTextColor={palette === "default" ? colors.primary.sandyBrown : colors.secondary.lightSlateGray}
-                style={tw.style(`flex-1 bg-primary-darkPrimary text-white px-5 py-2 border-[3px] border-white rounded-md font-ibmBold shadow text-[${wp(9, w)}px] landscape:text-[35px]`,
+                style={tw.style(`flex-1 bg-primary-darkPrimary text-white px-5 py-2 border-[3px] border-white rounded-xl font-ibmBold shadow-lg text-[${wp(9, w)}px] landscape:text-[35px]`,
                     { 'bg-secondary-darkPrimary text-secondary-tint': palette === "alternative" }
                 )}
             />

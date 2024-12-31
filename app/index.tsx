@@ -13,10 +13,11 @@ import { gameModeStore$, languageStore$, paletteStore$, speedLevelStore$, statis
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Motion } from "@legendapp/motion";
 import { Computed, observer, Show, useObservable } from "@legendapp/state/react";
+import { AudioPlayer, useAudioPlayer } from 'expo-audio';
 import * as Haptics from 'expo-haptics';
 import { router } from "expo-router";
 import { useEffect, useMemo, useRef } from "react";
-import { Keyboard, Platform, ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { Keyboard, ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import Modal from 'react-native-modal';
 
 
@@ -38,7 +39,8 @@ const Index = observer(function Index() {
 	const isModalVisible$ = useObservable(false);
 	const scrollviewRef = useRef<ScrollView>(null);
 	const idRef = useRef(0);
-	const { height, width } = useWindowDimensions();	
+	const { height, width } = useWindowDimensions();
+	const player = isWeb ? useAudioPlayer(require('@/assets/audio/bell.mp3')) : undefined;
 
 	const generatedNumber = useMemo(() => {
 		return generator(gameMode);
@@ -58,11 +60,13 @@ const Index = observer(function Index() {
 				? `${min}${language === "ukr" ? 'хв' : 'min'} ${sec}${language === "ukr" ? 'с' : 's'}`
 				: `${sec}${language === "ukr" ? 'с' : 's'}`
 			);
+
 			if (time <= 15) {
-				if (Platform.OS !== "web") {
-					Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-				}
+				isWeb
+					? (player as AudioPlayer).play() 
+					: Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 			}
+
 			if (time <= 0) {
 				clearInterval(timerId);
 				const newAttempt = {
@@ -236,7 +240,7 @@ const Index = observer(function Index() {
 									: 'Не допускаються однакові цифри та число менше чотиризначного '}
 							</Text>
 							<TouchableOpacity onPress={() => isModalVisible$.set(false)} style={tw`self-end p-2`}>
-								<Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: Platform.OS === 'web' && hp(3.8, height) })}>{language === "en" ? 'Okay!' : 'Святий Ґрааль!'}</Text>
+								<Text style={tw.style(`text-darkGray font-ibm text-[17px]`, { fontSize: isWeb && hp(3.8, height) })}>{language === "en" ? 'Okay!' : 'Святий Ґрааль!'}</Text>
 							</TouchableOpacity>
 						</View>
 					</Modal>

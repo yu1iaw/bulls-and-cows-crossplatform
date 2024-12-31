@@ -1,26 +1,26 @@
-import { numsArr } from "@/constants";
 import { GameModeStore, LanguageStore } from "./types";
 
 
 export function generator(gameMode: GameModeStore["mode"]) {
-    let num =
-        Math.floor(Math.random() * numsArr.length).toString() +
-        Math.floor(Math.random() * numsArr.length) +
-        Math.floor(Math.random() * numsArr.length) +
-        Math.floor(Math.random() * numsArr.length);
-    
+    let strNum = '';
+    let i = 0;
 
-    if (gameMode === "advanced") {
-        if (num.split("").find((digit) => num.indexOf(digit) !== num.lastIndexOf(digit))) {
-            num = generator("advanced");
+    while (i < 4) {
+        let d = Math.floor(Math.random() * 10);
+
+        if (gameMode === "standard" && i === 0 && d === 0) {
+            while (d === 0) {
+                d = Math.floor(Math.random() * 10);
+            }
         }
-    } else {
-        if (num.split("").find((digit) => num.indexOf(digit) !== num.lastIndexOf(digit)) || num[0] === '0') {
-            num = generator("standard");
+
+        while (!strNum.includes(`${d}`)) {
+            strNum += d;
+            i++;
         }
     }
     
-    return num;
+    return strNum;
 }
 
 export function guessNumber(inputValue: string, generatedNum: string, language: LanguageStore["language"]) {
