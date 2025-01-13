@@ -9,7 +9,7 @@ import { isWeb } from '@/constants';
 import tw from '@/lib/tailwind';
 import { Attempt } from "@/lib/types";
 import { generator, guessNumber, hp } from "@/lib/utils";
-import { gameModeStore$, languageStore$, paletteStore$, speedLevelStore$, statisticsStore$, switcherStore$ } from "@/store";
+import { gameModeStore$, languageStore$, paletteStore$, speedLevelStore$, statisticsFStore$, statisticsNStore$, switcherStore$ } from "@/store";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Motion } from "@legendapp/motion";
 import { Computed, observer, Show, useObservable } from "@legendapp/state/react";
@@ -82,9 +82,9 @@ const Index = observer(function Index() {
 					gameTracking$.assign({ seekingValue: newAttempt.value, finished: true });
 					router.navigate({ pathname: "/result", params: { title: newAttempt.value } });
 					if (newAttempt.id > 10) {
-						statisticsStore$["11+"].set(prev => prev ? ++prev : 1);
+						statisticsFStore$["11+"].set(prev => prev ? ++prev : 1);
 					} else {
-						statisticsStore$[newAttempt.id].set(prev => prev ? ++prev : 1);
+						statisticsFStore$[newAttempt.id].set(prev => prev ? ++prev : 1);
 					}
 				}
 			}
@@ -132,9 +132,13 @@ const Index = observer(function Index() {
 			gameTracking$.assign({ seekingValue: newAttempt.value, finished: true });
 			router.navigate({ pathname: "/result", params: { title: newAttempt.value } });
 			if (newAttempt.id > 10) {
-				statisticsStore$["11+"].set(prev => prev ? ++prev : 1);
+				speedLevel === "normal"
+					? statisticsNStore$["11+"].set(prev => prev ? ++prev : 1)
+					: statisticsFStore$["11+"].set(prev => prev ? ++prev : 1)
 			} else {
-				statisticsStore$[newAttempt.id].set(prev => prev ? ++prev : 1);
+				speedLevel === "normal"
+					? statisticsNStore$[newAttempt.id].set(prev => prev ? ++prev : 1)
+					: statisticsFStore$[newAttempt.id].set(prev => prev ? ++prev : 1)
 			}
 		}
 

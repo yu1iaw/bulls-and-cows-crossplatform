@@ -67,7 +67,7 @@ const RootLayoutNav = observer(function RootLayoutNav() {
                         headerRight: ({ tintColor }) => (
                             <TouchableOpacity
                                 style={tw`p-[10px] z-50`}
-                                onPress={() => router.navigate('/statistics')}
+                                onPress={() => router.navigate('/statistics' as '/statistics/forced' )}
                             >
                                 <Ionicons
                                     name="stats-chart-sharp"
@@ -100,6 +100,7 @@ const RootLayoutNav = observer(function RootLayoutNav() {
                 <Stack.Screen
                     name="statistics"
                     options={{
+                        headerShadowVisible: false,
                         headerTitle: language === "ukr" ? "Статистика" : "Statistics",
                         headerTitleStyle: { fontFamily: "IBM_bold", fontSize: 30 },
                         headerLeft: ({ tintColor }) => (

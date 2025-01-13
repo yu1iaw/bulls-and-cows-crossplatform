@@ -58,10 +58,18 @@ export const paletteStore$ = observable<PaletteStore>({
     })
 })
 
-export const statisticsStore$ = observable<StatisticsStore>(synced({
+export const statisticsNStore$ = observable<StatisticsStore>(synced({
     persist: {
         plugin: ObservablePersistMMKV,
-        name: "statistics",
+        name: "statisticsN",
+    },
+    initial: {}
+}));
+
+export const statisticsFStore$ = observable<StatisticsStore>(synced({
+    persist: {
+        plugin: ObservablePersistMMKV,
+        name: "statisticsF",
     },
     initial: {}
 }));

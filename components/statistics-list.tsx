@@ -43,9 +43,9 @@ const StatisticsRow = ({ id, item$, total, language, palette, w, h }: Statistics
     return (
         <View style={tw.style(`flex-row justify-between items-center gap-x-1`)}>
             <View style={tw.style(`w-[85px] pl-2 landscape:w-[150px]`)}>
-                <Text style={tw.style(`font-caveatSemi text-darkGray text-[${language === "ukr" ? wp(6, w) : wp(6.3, w)}px] landscape:text-[${hp(4.3, h)}px]`)}>{key} {key.length < 3 && label}</Text>
+                <Text style={tw.style(`font-caveatSemi text-darkGray text-[${language === "ukr" ? wp(6, w) : wp(6.3, w)}px] landscape:text-[${hp(4, h)}px]`)}>{key} {key.length < 3 && label}</Text>
             </View>
-            <View style={tw.style(`flex-1 bg-primary-tint h-[${wp(8, w)}px] landscape:h-[${hp(6, h)}px]`, { 'bg-[ivory]': palette === "alternative" }, Platform.select({ web: { height: hp(6, h), width: wp(50, w) } }))}>
+            <View style={tw.style(`flex-1 bg-primary-tint h-[${wp(8, w)}px] landscape:h-[${hp(5.5, h)}px]`, { 'bg-[#fdfdf3]': palette === "alternative" }, Platform.select({ web: { height: hp(5, h), width: wp(50, w) } }))}>
                 <Motion.View
                     initial={{ width: "0%" }}
                     animate={{ width: barWidth }}
@@ -54,7 +54,7 @@ const StatisticsRow = ({ id, item$, total, language, palette, w, h }: Statistics
                 />
             </View>
             <View style={tw.style(`w-16 items-center landscape:w-32`)}>
-                <Text style={tw.style(`font-ibm text-darkGray text-[${wp(5, w)}px] landscape:text-[${hp(4, h)}px]`)}>{val}</Text>
+                <Text style={tw.style(`font-ibm text-darkGray text-[${wp(5, w)}px] landscape:text-[${hp(3.5, h)}px]`)}>{val}</Text>
             </View>
         </View>
     )

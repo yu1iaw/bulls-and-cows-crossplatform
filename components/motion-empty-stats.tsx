@@ -20,7 +20,7 @@ export const MotionEmptyStats = ({ language, w, h }: MotionEmptyStatsProps) => {
                 transition={{ type: "tween", duration: 200, delay: 100 }}
                 style={tw.style(`text-[${wp(8, w)}px] landscape:text-[${hp(5.5, h)}px] text-darkGray font-caveatSemi`)}
             >
-                {language === "en" ? 'Get started from scratch' : 'Колись тут була статистика'}
+                {language === "en" ? 'Get started from scratch ' : 'Місце для статистики '}
             </Motion.Text>
         </View>
     )
